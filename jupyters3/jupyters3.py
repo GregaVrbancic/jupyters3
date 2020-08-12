@@ -343,7 +343,7 @@ def _file_exists(context, path):
 
 @gen.coroutine
 def _exists(context, path):
-    return (yield _file_exists(context, path)) or (yield _dir_exists(context, path)) 
+    return (yield _file_exists(context, path)) or (yield _dir_exists(context, path))
 
 
 @gen.coroutine
@@ -383,11 +383,11 @@ def _get_any(context, path, content, type, mimetype, format, decode):
         'type': type,
         'mimetype': mimetype,
         'writable': True,
-        'last_modified': last_modified, 
+        'last_modified': last_modified,
         'created': last_modified,
-        'format': format if content else None,  
+        'format': format if content else None,
         'content': decode(file_bytes) if content else None,
-    }  
+    }
 
 
 @gen.coroutine
@@ -406,7 +406,7 @@ def _get_directory(context, path, content):
         'type': 'directory',
         'mimetype': None,
         'writable': True,
-        'last_modified': datetime.datetime.fromtimestamp(86400), 
+        'last_modified': datetime.datetime.fromtimestamp(86400),
         'created': datetime.datetime.fromtimestamp(86400),
         'format': 'json' if content else None,
         'content': ([
@@ -504,7 +504,7 @@ def _saved_model(path, type, mimetype, last_modified):
         'type': type,
         'mimetype': mimetype,
         'writable': True,
-        'last_modified': last_modified, 
+        'last_modified': last_modified,
         'created': last_modified,
         'format': None,
         'content': None,
@@ -815,7 +815,7 @@ def _make_s3_request(context, method, path, query, api_pre_auth_headers, payload
 
     querystring = urllib.parse.urlencode(query, safe='~', quote_via=urllib.parse.quote)
     encoded_path = urllib.parse.quote(full_path, safe='/~')
-    url = f'https://{context.s3_host}{encoded_path}' + (('?' + querystring) if querystring else '')
+    url = f'{context.s3_host}{encoded_path}' + (('?' + querystring) if querystring else '')
 
     body = \
         payload if method == 'PUT' else \
